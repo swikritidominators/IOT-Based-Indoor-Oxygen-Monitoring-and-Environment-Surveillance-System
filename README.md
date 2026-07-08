@@ -104,3 +104,7 @@ Environmental Forecasting
 📋 Recommendation Engine
 📊 Environmental Statistics
 ☁ Firebase Synchronization
+
+
+
+
