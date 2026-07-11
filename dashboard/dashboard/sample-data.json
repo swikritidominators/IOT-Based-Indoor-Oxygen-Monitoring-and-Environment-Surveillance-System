@@ -1,0 +1,43 @@
+{
+  "sensors": {
+    "current": {
+      "oxygen": 20.8,
+      "temperature": 27.5,
+      "humidity": 58,
+      "timestamp": "2026-07-02T00:15:00Z"
+    },
+    "history": {
+      "item1": {
+        "oxygen": 20.8,
+        "temperature": 27.5,
+        "humidity": 58,
+        "timestamp": "2026-07-02T00:15:00Z"
+      },
+      "item2": {
+        "oxygen": 20.7,
+        "temperature": 27.6,
+        "humidity": 59,
+        "timestamp": "2026-07-02T00:20:00Z"
+      },
+      "item3": {
+        "oxygen": 20.6,
+        "temperature": 27.7,
+        "humidity": 60,
+        "timestamp": "2026-07-02T00:25:00Z"
+      }
+    }
+  },
+  "alerts": {
+    "active": {
+      "alert1": {
+        "id": 1,
+        "message": "Oxygen concentration is abnormal.",
+        "oxygen": 19.92,
+        "level": "warning",
+        "acknowledged": false,
+        "timestamp": "2026-07-02T01:00:00Z"
+      }
+    },
+    "history": {}
+  }
+}
