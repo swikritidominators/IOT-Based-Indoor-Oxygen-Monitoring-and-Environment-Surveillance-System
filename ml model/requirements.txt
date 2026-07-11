@@ -1,0 +1,9 @@
+firebase-admin
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+xgboost
+statsmodels
+joblib

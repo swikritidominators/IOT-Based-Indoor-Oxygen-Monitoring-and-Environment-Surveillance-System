@@ -1,0 +1,40 @@
+PHASE 3 RESULTS REPORT
+============================================================
+
+MODEL COMPARISON:
+       model target     MAE    RMSE       R2  MAPE_%
+       Naive   5min 0.07559 0.21062 -0.84523 0.36287
+       Ridge   5min 0.07274 0.15389  0.01490 0.34948
+RandomForest   5min 0.05572 0.14126  0.17001 0.26782
+     XGBoost   5min 0.06629 0.14623  0.11055 0.31822
+       Naive  10min 0.08727 0.21205 -0.87017 0.41886
+       Ridge  10min 0.07603 0.15831 -0.04241 0.36536
+RandomForest  10min 0.06069 0.14449  0.13170 0.29173
+     XGBoost  10min 0.07447 0.15222  0.03629 0.35755
+
+TOP 10 FEATURES (XGBoost 5-min model):
+         feature  importance
+         o2_lag1    0.073958
+  o2_roll_mean_3    0.059191
+      o2_delta_3    0.058043
+         o2_lag2    0.032345
+        occ_lag1    0.031882
+  o2_roll_mean_6    0.030740
+ occ_roll_mean_3    0.028430
+       temp_lag1    0.024944
+       hum_lag12    0.022511
+temp_roll_mean_3    0.022228
+
+SAVED FILES:
+  model_ridge_5min.pkl
+  model_rf_5min.pkl
+  model_xgb_5min.pkl
+  model_xgb_10min.pkl
+  feature_scaler.pkl
+  model_comparison.csv
+  plot7_model_comparison.png
+  plot8_actual_vs_pred.png
+  plot9_feature_importance.png
+  plot10_residuals.png
+
+NEXT: Run phase4_anomaly_detection.py

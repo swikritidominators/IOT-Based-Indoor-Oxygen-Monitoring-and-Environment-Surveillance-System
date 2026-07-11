@@ -1,0 +1,403 @@
+============================================================
+OXYGEN MONITORING ML PIPELINE - EXPERIMENTAL RESULTS
+============================================================
+
+Project:
+Short-Horizon Indoor Oxygen Forecasting and Anomaly Detection
+
+Experiment Type:
+Preliminary methodological validation using physics-informed
+synthetic sensor data.
+
+NOTE:
+All results reported below were obtained using synthetic data.
+These results establish baseline performance for the ML pipeline
+and should be re-evaluated after sufficient real sensor data is
+collected from the deployed IoT monitoring system.
+
+
+============================================================
+1. DATASET SUMMARY
+============================================================
+
+Total Records          : 2160
+Sampling Interval      : 5 minutes
+Simulation Duration    : 7.5 days
+
+O2 Range               : 19.508% - 21.500%
+Mean O2 Concentration  : 20.933%
+O2 Standard Deviation  : 0.153%
+
+Injected Anomalies     : 226 records (10.5%)
+
+Training Records       : 1716 (80%)
+Test Records           : 430 (20%)
+
+Train/Test Strategy    : Chronological Split
+
+Number of Engineered Features : 54
+
+
+============================================================
+2. FORECASTING MODELS EVALUATED
+============================================================
+
+Models:
+
+1. Naive Persistence Baseline
+2. Ridge Regression
+3. Random Forest
+4. XGBoost
+
+
+Random Forest Configuration:
+
+Number of Trees : 200
+Maximum Depth   : 10
+
+
+XGBoost Configuration:
+
+Number of Estimators : 300
+Learning Rate        : 0.05
+Maximum Depth        : 5
+
+
+============================================================
+3. FORECASTING MODEL COMPARISON
+============================================================
+
+---------------------------------------------------------------------------
+Model               5-min MAE   5-min RMSE   5-min R2
+                    10-min MAE  10-min RMSE  10-min R2
+---------------------------------------------------------------------------
+
+Naive Baseline
+
+5-minute MAE        : 0.0756%
+5-minute RMSE       : 0.2106%
+5-minute R2         : -0.845
+
+10-minute MAE       : 0.0873%
+10-minute RMSE      : 0.2121%
+10-minute R2        : -0.870
+
+
+Ridge Regression
+
+5-minute MAE        : 0.0727%
+5-minute RMSE       : 0.1539%
+5-minute R2         : 0.015
+
+10-minute MAE       : 0.0760%
+10-minute RMSE      : 0.1583%
+10-minute R2        : -0.042
+
+
+Random Forest
+
+5-minute MAE        : 0.0557%
+5-minute RMSE       : 0.1413%
+5-minute R2         : 0.170
+
+10-minute MAE       : 0.0607%
+10-minute RMSE      : 0.1445%
+10-minute R2        : 0.132
+
+
+XGBoost
+
+5-minute MAE        : 0.0663%
+5-minute RMSE       : 0.1462%
+5-minute R2         : 0.111
+
+10-minute MAE       : 0.0745%
+10-minute RMSE      : 0.1522%
+10-minute R2        : 0.036
+
+
+============================================================
+4. BEST FORECASTING MODEL
+============================================================
+
+Best Model: RANDOM FOREST
+
+
+5-Minute Forecast Performance
+
+MAE  : 0.0557%
+RMSE : 0.1413%
+R2   : 0.170
+
+
+10-Minute Forecast Performance
+
+MAE  : 0.0607%
+RMSE : 0.1445%
+R2   : 0.132
+
+
+Improvement Over Naive Persistence Baseline:
+
+5-Minute Forecast MAE Improvement  : 26.3%
+10-Minute Forecast MAE Improvement : 30.5%
+
+
+Conclusion:
+
+Random Forest achieved the lowest MAE and RMSE and the highest
+R2 score for both forecasting horizons.
+
+The results indicate that the engineered temporal and
+environmental features provide predictive information beyond
+simply using the most recent oxygen reading.
+
+
+============================================================
+5. XGBOOST FEATURE IMPORTANCE
+============================================================
+
+Top 10 Features for the 5-Minute Forecast Model
+
+
+Rank   Feature                Importance
+
+1      o2_lag1                0.0740
+
+2      o2_roll_mean_3         0.0592
+
+3      o2_delta_3             0.0580
+
+4      o2_lag2                0.0323
+
+5      occ_lag1               0.0319
+
+6      o2_roll_mean_6         0.0307
+
+7      occ_roll_mean_3        0.0284
+
+8      temp_lag1              0.0249
+
+9      hum_lag12              0.0225
+
+10     temp_roll_mean_3       0.0222
+
+
+Key Observation:
+
+Oxygen lag, rolling mean, and rate-of-change features dominate
+the feature importance ranking.
+
+Occupancy, temperature, and humidity features also contribute
+to short-horizon oxygen forecasting.
+
+
+============================================================
+6. ANOMALY DETECTION MODEL COMPARISON
+============================================================
+
+Test Set Size             : 430 records
+Labelled Test Anomalies   : 46
+
+
+---------------------------------------------------------------------------
+Detector                Precision     Recall       F1       FPR
+---------------------------------------------------------------------------
+
+Isolation Forest          0.500        0.674      0.574     0.081
+
+CUSUM                     0.619        0.283      0.388     0.021
+
+Combined (OR Logic)       0.493        0.717      0.584     0.089
+
+
+============================================================
+7. ANOMALY DETECTOR ANALYSIS
+============================================================
+
+Isolation Forest:
+
+Precision : 0.500
+Recall    : 0.674
+F1 Score  : 0.574
+FPR       : 0.081
+
+
+CUSUM:
+
+Precision : 0.619
+Recall    : 0.283
+F1 Score  : 0.388
+FPR       : 0.021
+
+
+Combined Isolation Forest + CUSUM:
+
+Precision : 0.493
+Recall    : 0.717
+F1 Score  : 0.584
+FPR       : 0.089
+
+
+Best Recall:
+
+Combined Detector (0.717)
+
+
+Best Precision:
+
+CUSUM (0.619)
+
+
+Best F1 Score:
+
+Combined Detector (0.584)
+
+
+Lowest False Positive Rate:
+
+CUSUM (0.021)
+
+
+The combined detector caught 33 of the 46 labelled anomalies.
+
+The combined anomaly detection approach prioritizes recall
+because missed hazardous oxygen excursions may be more
+consequential than additional false-positive alerts.
+
+
+============================================================
+8. AIR-CONDITIONING EFFECT ANALYSIS
+============================================================
+
+Statistical Test:
+
+Mann-Whitney U Test
+
+
+Controlled Occupancy Range:
+
+2 - 4 occupants
+
+
+AC ON:
+
+Mean O2 Depletion Rate
+
+0.000495% per 5-minute interval
+
+
+AC OFF:
+
+Mean O2 Depletion Rate
+
+0.004106% per 5-minute interval
+
+
+Statistical Significance:
+
+p-value = 0.0032
+
+Result:
+
+Statistically significant at p < 0.01.
+
+
+Interpretation:
+
+Within the physics-informed synthetic dataset, AC-on periods
+showed a lower mean oxygen depletion rate than AC-off periods.
+
+This result validates that the statistical testing pipeline can
+detect the AC effect encoded in the synthetic data generator.
+
+It should not be interpreted as a general empirical conclusion
+about real-world air-conditioning systems.
+
+
+============================================================
+9. OVERALL EXPERIMENTAL CONCLUSION
+============================================================
+
+Best Forecasting Model:
+
+Random Forest
+
+
+Best 5-Minute MAE:
+
+0.0557% O2
+
+
+Best 10-Minute MAE:
+
+0.0607% O2
+
+
+Improvement Over Naive Baseline:
+
+26.3% (5-minute forecast)
+
+30.5% (10-minute forecast)
+
+
+Best Anomaly Detection Configuration:
+
+Isolation Forest + CUSUM (OR Logic)
+
+
+Combined Detector Recall:
+
+0.717
+
+
+Combined Detector F1 Score:
+
+0.584
+
+
+AC Hypothesis Test:
+
+p = 0.0032
+
+
+============================================================
+10. LIMITATIONS
+============================================================
+
+1. All experiments were conducted using physics-informed
+   synthetic data.
+
+2. Real-world sensor noise, sensor drift, cross-sensitivity,
+   and environmental confounding variables may affect model
+   performance.
+
+3. The dataset represents a single simulated room configuration.
+
+4. Occupancy values used during the experiments were simulated.
+
+5. Model performance must be re-evaluated after sufficient
+   real sensor data is collected.
+
+
+============================================================
+11. NEXT STEPS
+============================================================
+
+1. Collect real O2, temperature, humidity, occupancy, and
+   AC-status sensor data.
+
+2. Re-run the same chronological ML evaluation pipeline.
+
+3. Compare Random Forest and XGBoost performance as the
+   real dataset grows.
+
+4. Recalibrate the oxygen depletion model using measured data.
+
+5. Re-evaluate anomaly detection thresholds.
+
+6. Repeat the AC-effect hypothesis test using real measurements.
+
+============================================================
+END OF EXPERIMENTAL RESULTS
+============================================================

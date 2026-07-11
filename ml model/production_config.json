@@ -1,0 +1,20 @@
+{
+  "database_url": "https://iot-cfees-default-rtdb.asia-southeast1.firebasedatabase.app",
+  "sensor_path": "/sensors/room1/readings",
+  "prediction_path": "/predictions/room1/readings",
+  "alert_path": "/alerts/room1",
+  "cycle_seconds": 300,
+  "min_records_needed": 15,
+  "fetch_n_records": 25,
+  "xgb_5min_path": "model_xgb_5min.pkl",
+  "xgb_10min_path": "model_xgb_10min.pkl",
+  "iso_model_path": "anomaly_iso_model.pkl",
+  "train_data_path": "train_data.csv",
+  "cusum_slack_mult": 0.5,
+  "cusum_thresh_mult": 5.0,
+  "critical_o2": 19.5,
+  "warning_o2": 20.0,
+  "rapid_drop_rate": 0.1,
+  "log_file": "production.log",
+  "model_version": "xgb_v1_phase3"
+}

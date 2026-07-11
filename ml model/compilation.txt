@@ -1,0 +1,28 @@
+cd oxygen_ml_project
+pip install -r requirements.txt
+
+if error in above - pip install -r requirements.txt --user
+
+python -c "import firebase_admin, pandas, numpy, xgboost; print('All libraries OK')"
+
+python task1_2_firebase_connect.py
+python task1_3_read_firebase.py
+python task1_4_write_test_record.py
+python task1_5_read_to_dataframe.py
+python task1_6_synthetic_generator.py   ← generates 3 plots + CSV
+python task1_7_push_synthetic.py        ← type 'yes' when prompted
+python task1_8_verify_roundtrip.py
+
+python task1_fix_timestamps.py
+
+python phase2_feature_engineering.py
+
+python fix_phase2_summary.py
+
+python phase3_model_training.py
+
+python verify_predictions.py
+
+python phase4_anomaly_detection.py
+
+python phase5_production_loop.py --test

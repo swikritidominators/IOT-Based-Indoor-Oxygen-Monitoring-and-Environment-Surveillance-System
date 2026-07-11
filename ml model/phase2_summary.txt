@@ -1,0 +1,82 @@
+PHASE 2 SUMMARY REPORT
+============================================================
+Total records after feature engineering : 2146
+Number of feature columns               : 54
+Recommended lags from PACF              : 17
+Significant PACF lags                   : [1,2,3,5,6,9,11,12,17]
+
+FEATURE COLUMNS:
+  01. o2_lag1
+  02. temp_lag1
+  03. hum_lag1
+  04. o2_lag2
+  05. temp_lag2
+  06. hum_lag2
+  07. o2_lag3
+  08. temp_lag3
+  09. hum_lag3
+  10. o2_lag4
+  11. temp_lag4
+  12. hum_lag4
+  13. o2_lag5
+  14. temp_lag5
+  15. hum_lag5
+  16. o2_lag6
+  17. temp_lag6
+  18. hum_lag6
+  19. o2_lag7
+  20. temp_lag7
+  21. hum_lag7
+  22. o2_lag8
+  23. temp_lag8
+  24. hum_lag8
+  25. o2_lag9
+  26. temp_lag9
+  27. hum_lag9
+  28. o2_lag10
+  29. temp_lag10
+  30. hum_lag10
+  31. o2_lag11
+  32. temp_lag11
+  33. hum_lag11
+  34. o2_lag12
+  35. temp_lag12
+  36. hum_lag12
+  37. o2_delta_1
+  38. o2_delta_3
+  39. o2_delta_6
+  40. temp_delta_1
+  41. hum_delta_1
+  42. o2_roll_mean_3
+  43. o2_roll_mean_6
+  44. o2_roll_std_3
+  45. temp_roll_mean_3
+  46. hum_roll_mean_3
+  47. hour_sin
+  48. hour_cos
+  49. dow_sin
+  50. dow_cos
+  51. occ_lag1
+  52. occ_roll_mean_3
+  53. occ_delta_1
+  54. ac_lag1
+
+TRAIN SET:
+  Records : 1716
+
+TEST SET:
+  Records : 430
+
+TARGET STATISTICS:
+  target_5min  mean=20.9331  std=0.1537
+  target_10min mean=20.9331  std=0.1537
+
+FILES PRODUCED:
+  featured_data.csv
+  train_data.csv
+  test_data.csv
+  plot4_acf_pacf.png
+  plot5_feature_heatmap.png
+  plot6_target_analysis.png
+
+NEXT: Run phase3_model_training.py
